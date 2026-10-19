@@ -1,382 +1,374 @@
 
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IAFL | International Academy Football League</title>
-<style>
+/* IAFL — Premium Editorial Design */
 :root {
-  --navy:#07152e;
-  --blue:#153a70;
-  --gold:#e9c66b;
-  --bg:#f3f6fb;
-  --line:#dce3ed;
+  --navy: #09172b;
+  --blue: #142b49;
+  --gold: #c9ad70;
+  --bg: #f5f2eb;
+  --line: #e3ded2;
 }
-*{box-sizing:border-box}
-body{
-  margin:0;background:var(--bg);color:#17243b;
-  font-family:Arial,"Microsoft YaHei",sans-serif;
-}
-header{
-  background:linear-gradient(125deg,#061126,#12396b);
-  color:white;padding:38px 6% 32px;
-}
-.brand{color:var(--gold);font-size:12px;letter-spacing:4px;font-weight:bold}
-h1{font-size:clamp(32px,5vw,54px);margin:12px 0 8px;letter-spacing:1px}
-header p{color:#c8d5e8;margin:0}
-nav{
-  background:#0b1e3b;padding:0 6%;display:flex;gap:25px;
-  overflow-x:auto;
-}
-nav a{color:white;text-decoration:none;padding:16px 0;white-space:nowrap;font-size:14px}
-nav a:hover{color:var(--gold)}
-main{max-width:1250px;margin:auto;padding:28px 18px 60px}
-.section{margin:0 0 38px;scroll-margin-top:20px}
-.section-head{display:flex;align-items:end;justify-content:space-between;gap:12px;margin-bottom:16px}
-h2{margin:0;font-size:25px;color:var(--navy)}
-.sub{font-size:13px;color:#728096;margin-top:6px}
-.panel{
-  background:white;border:1px solid var(--line);border-radius:15px;
-  padding:18px;margin-bottom:16px;box-shadow:0 4px 15px #152b4908;
-}
-.panel h3{margin:0 0 15px;color:var(--blue);font-size:17px}
-.match-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.match{
-  border:1px solid var(--line);border-radius:10px;padding:13px;
-  display:grid;grid-template-columns:minmax(0,1fr) 43px 12px 43px minmax(0,1fr);
-  align-items:center;gap:6px;
-}
-.team{font-size:13px;font-weight:600;overflow-wrap:anywhere}
-.team:first-child{text-align:right}
-.score{
-  width:43px;height:37px;border:1px solid #cbd5e2;border-radius:7px;
-  text-align:center;font-size:17px;font-weight:bold;background:#f9fbfe;
-  color:var(--navy);min-width:0;
-}
-.score:focus{outline:2px solid #739bd4;border-color:transparent}
-.dash{text-align:center;color:#8b98aa}
-.match-label{grid-column:1/-1;font-size:10px;letter-spacing:1px;color:#8190a4;text-transform:uppercase}
-.table-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px;white-space:nowrap}
-th,td{padding:11px 10px;border-bottom:1px solid #edf0f5;text-align:center}
-th{color:#718096;font-size:11px;letter-spacing:.5px;background:#f8faff}
-td:nth-child(2),th:nth-child(2){text-align:left}
-.rank{font-weight:bold;color:#a17b22}
-.qualified{background:#f1f7ff}
-.bracket{
-  display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1fr);
-  gap:18px;align-items:center;
-}
-.bracket-col{display:flex;flex-direction:column;gap:20px;min-width:0}
-.bracket-col.middle{gap:30px}
-.round-label{font-size:11px;letter-spacing:2px;color:#7a8ba3;font-weight:bold;margin-bottom:9px}
-.ko-card{
-  background:white;border:1px solid var(--line);border-radius:12px;
-  padding:14px;box-shadow:0 4px 14px #152b4908;min-width:0;
-}
-.ko-card.final{
-  border:2px solid var(--gold);
-  background:linear-gradient(150deg,#fff,#fffcf0);
-}
-.ko-title{font-size:10px;letter-spacing:1.5px;color:#7a899e;margin-bottom:12px;font-weight:bold}
-.ko-team{
-  display:flex;align-items:center;justify-content:space-between;gap:5px;
-  padding:10px 0;border-bottom:1px solid #edf0f5;font-size:12px;font-weight:600;
-}
-.ko-team:last-of-type{border-bottom:0}
-.ko-team.winner{color:#98701c}
-.ko-team .name{overflow-wrap:anywhere;min-width:0}
-.ko-team .val{font-size:15px;flex-shrink:0}
-.ko-inputs{display:flex;align-items:center;gap:7px;margin-top:10px}
-.ko-inputs label{font-size:10px;color:#8290a2}
-.ko-inputs .score{width:38px;height:32px;font-size:15px}
-.ko-inputs .pk{width:35px;height:29px;border:1px solid #d5dce6;border-radius:6px;text-align:center}
-.pk-note{font-size:10px;color:#8491a4;margin-top:8px;line-height:1.5}
-.status{font-size:10px;color:#8a96a7;margin-top:9px}
-.champion{
-  text-align:center;background:var(--navy);color:white;border-radius:14px;padding:22px 12px;
-}
-.champion .cup{font-size:29px}
-.champion .small{font-size:10px;letter-spacing:3px;color:var(--gold);margin:9px 0}
-.champion .name{font-size:19px;font-weight:bold;overflow-wrap:anywhere}
-.champion .hint{font-size:11px;color:#b8c7dd;margin-top:8px}
-.notice{font-size:12px;line-height:1.7;color:#77869b;margin-top:12px}
-footer{background:#07152e;color:#9eacc1;padding:26px;text-align:center;font-size:11px;letter-spacing:1px}
-@media(max-width:760px){
-  .match-list{grid-template-columns:1fr}
-  .bracket{grid-template-columns:1fr;gap:14px}
-  .bracket-col{gap:12px}
-  .bracket-col.middle{gap:14px}
-  .bracket-col:nth-child(1){order:1}
-  .bracket-col:nth-child(2){order:3}
-  .bracket-col:nth-child(3){order:2}
-  .match{padding:11px 8px}
-  .panel{padding:13px}
-}
-</style>
-</head>
-<body>
-<header>
-  <div class="brand">IAFL · FOOTBALL · COMMUNITY</div>
-  <h1>IAFL LEAGUE</h1>
-  <p>International Academy Football League · Official Match Center</p>
-</header>
-<nav>
-  <a href="#fixtures">Fixtures & Results</a>
-  <a href="#standings">Group Standings</a>
-  <a href="#knockout">Knockout Stage</a>
-</nav>
 
-<main>
-  <section class="section" id="fixtures">
-    <div class="section-head">
-      <div><h2>Fixtures & Results</h2><div class="sub">Enter match scores to update standings automatically.</div></div>
-    </div>
-    <div id="fixtures-content"></div>
-  </section>
+* {
+  box-sizing: border-box;
+}
 
-  <section class="section" id="standings">
-    <div class="section-head">
-      <div><h2>Group Standings</h2><div class="sub">3 points for a win · 1 for a draw · 0 for a loss</div></div>
-    </div>
-    <div id="standings-content"></div>
-  </section>
+body {
+  background: #f5f2eb;
+  color: #17243a;
+  font-family: "Helvetica Neue", Arial, "Microsoft YaHei", sans-serif;
+  letter-spacing: 0.1px;
+}
 
-  <section class="section" id="knockout">
-    <div class="section-head">
-      <div><h2>Road to the Championship</h2><div class="sub">Semifinals · Third-Place Match · Final</div></div>
-    </div>
-    <div class="bracket">
-      <div class="bracket-col">
-        <div>
-          <div class="round-label">SEMI-FINAL 01</div>
-          <div id="sf1"></div>
-        </div>
-        <div>
-          <div class="round-label">THIRD-PLACE MATCH</div>
-          <div id="third"></div>
-        </div>
-      </div>
-      <div class="bracket-col middle">
-        <div>
-          <div class="round-label">THE FINAL</div>
-          <div id="final"></div>
-        </div>
-        <div class="champion">
-          <div class="cup">🏆</div>
-          <div class="small">IAFL CHAMPIONS</div>
-          <div class="name" id="champion-name">To Be Decided</div>
-          <div class="hint" id="champion-hint">The road to glory starts here.</div>
-        </div>
-      </div>
-      <div class="bracket-col">
-        <div>
-          <div class="round-label">SEMI-FINAL 02</div>
-          <div id="sf2"></div>
-        </div>
-      </div>
-    </div>
-    <p class="notice">
-      Knockout matches require a winner. If a match is tied, enter the penalty shootout scores in the PK fields.
-      Teams qualify from the group standings once all their group matches are completed.
-    </p>
-  </section>
-</main>
-<footer>IAFL · INTERNATIONAL ACADEMY FOOTBALL LEAGUE</footer>
+header {
+  position: relative;
+  overflow: hidden;
+  padding: 64px 7% 58px;
+  background:
+    radial-gradient(ellipse at 82% 20%, #28476a 0%, transparent 42%),
+    linear-gradient(120deg, #071326, #102844 75%, #172d47);
+  border-bottom: 3px solid #c9ad70;
+}
 
-<script>
-const groups = {
-  A: ["80 国际","八一国际","北中国际","101 国际"],
-  B: ["35中国际","北大附道尔顿","首师附国际","师大附联队"]
-};
+header::after {
+  content: "IAFL";
+  position: absolute;
+  right: -10px;
+  bottom: -65px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(130px, 24vw, 300px);
+  line-height: 1;
+  font-weight: bold;
+  letter-spacing: -12px;
+  color: #ffffff;
+  opacity: 0.035;
+  pointer-events: none;
+}
 
-const rounds = [
-  {group:"A",round:"ROUND 1",matches:[["80 国际","八一国际"],["北中国际","101 国际"]]},
-  {group:"B",round:"ROUND 1",matches:[["35中国际","师大附联队"],["北大附道尔顿","首师附国际"]]},
-  {group:"A",round:"ROUND 2",matches:[["八一国际","101 国际"],["80 国际","北中国际"]]},
-  {group:"B",round:"ROUND 2",matches:[["35中国际","首师附国际"],["师大附联队","北大附道尔顿"]]},
-  {group:"A",round:"ROUND 3",matches:[["八一国际","北中国际"],["80 国际","101 国际"]]},
-  {group:"B",round:"ROUND 3",matches:[["35中国际","北大附道尔顿"],["首师附国际","师大附联队"]]}
-];
+.brand {
+  color: #d8bf85;
+  font-size: 10px;
+  letter-spacing: 5px;
+  font-weight: 600;
+}
 
-const matchScores = {};
-const koScores = {
-  sf1:{a:"",b:"",pa:"",pb:""},
-  sf2:{a:"",b:"",pa:"",pb:""},
-  third:{a:"",b:"",pa:"",pb:""},
-  final:{a:"",b:"",pa:"",pb:""}
-};
+h1 {
+  position: relative;
+  z-index: 1;
+  margin: 25px 0 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(48px, 8vw, 88px);
+  font-weight: 400;
+  line-height: 0.98;
+  letter-spacing: -2px;
+}
 
-function esc(s){
-  return String(s).replace(/[&<>"']/g,c=>({
-    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
-  }[c]));
+header p {
+  position: relative;
+  z-index: 1;
+  max-width: 520px;
+  color: #c0cada;
+  font-size: 12px;
+  letter-spacing: 1.2px;
+  line-height: 1.9;
 }
-function scoreInput(id,side,value){
-  return `<input class="score" type="number" min="0" step="1" aria-label="Score ${side}" value="${value}" onchange="setGroupScore('${id}','${side}',this.value)">`;
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  padding: 0 7%;
+  gap: 30px;
+  background: rgba(7, 19, 38, 0.97);
+  border-bottom: 1px solid #c9ad7040;
 }
-function renderFixtures(){
-  const host=document.getElementById("fixtures-content");
-  host.innerHTML=rounds.map((r,ri)=>`
-    <div class="panel">
-      <h3>Group ${r.group} · ${r.round}</h3>
-      <div class="match-list">
-        ${r.matches.map((m,mi)=>{
-          const id=`r${ri}m${mi}`;
-          const s=matchScores[id]||{a:"",b:""};
-          return `<div class="match">
-            <div class="match-label">${r.round} · GROUP ${r.group}</div>
-            <div class="team">${esc(m[0])}</div>
-            ${scoreInput(id,"a",s.a)}
-            <div class="dash">–</div>
-            ${scoreInput(id,"b",s.b)}
-            <div class="team">${esc(m[1])}</div>
-          </div>`;
-        }).join("")}
-      </div>
-    </div>`).join("");
+
+nav a {
+  position: relative;
+  padding: 18px 0;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #d9deea;
+  transition: color 0.2s ease;
 }
-function setGroupScore(id,side,value){
-  matchScores[id]=matchScores[id]||{a:"",b:""};
-  matchScores[id][side]=value;
-  renderStandings();
-  renderBracket();
+
+nav a:hover {
+  color: #d8bf85;
 }
-function completed(s){
-  return s && s.a!=="" && s.b!=="" &&
-    Number.isFinite(Number(s.a)) && Number.isFinite(Number(s.b)) &&
-    Number(s.a)>=0 && Number(s.b)>=0;
+
+main {
+  max-width: 1320px;
+  padding: 54px 5% 80px;
 }
-function getStandings(group){
-  const table={};
-  groups[group].forEach(name=>{
-    table[name]={name,played:0,w:0,d:0,l:0,gf:0,ga:0,pts:0};
-  });
-  rounds.forEach((r,ri)=>{
-    if(r.group!==group)return;
-    r.matches.forEach((m,mi)=>{
-      const s=matchScores[`r${ri}m${mi}`];
-      if(!completed(s))return;
-      const a=Number(s.a),b=Number(s.b);
-      const x=table[m[0]],y=table[m[1]];
-      x.played++;y.played++;
-      x.gf+=a;x.ga+=b;y.gf+=b;y.ga+=a;
-      if(a>b){x.w++;x.pts+=3;y.l++;}
-      else if(a<b){y.w++;y.pts+=3;x.l++;}
-      else{x.d++;y.d++;x.pts++;y.pts++;}
-    });
-  });
-  return Object.values(table).map(t=>({...t,gd:t.gf-t.ga}))
-    .sort((x,y)=>y.pts-x.pts||y.gd-x.gd||y.gf-x.gf||x.name.localeCompare(y.name,"zh"));
+
+.section {
+  margin-bottom: 58px;
+  scroll-margin-top: 75px;
 }
-function groupComplete(group){
-  return rounds.filter(r=>r.group===group)
-    .every((r,ri)=>r.matches.every((m,mi)=>{
-      const index=rounds.indexOf(r);
-      return completed(matchScores[`r${index}m${mi}`]);
-    }));
+
+.section-head {
+  padding-bottom: 20px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #d9d2c4;
 }
-function renderStandings(){
-  const host=document.getElementById("standings-content");
-  host.innerHTML=["A","B"].map(g=>{
-    const rows=getStandings(g);
-    const complete=groupComplete(g);
-    return `<div class="panel">
-      <h3>Group ${g} ${complete?"· COMPLETE":"· IN PROGRESS"}</h3>
-      <div class="table-wrap"><table>
-        <thead><tr><th>#</th><th>TEAM</th><th>P</th><th>W</th><th>D</th><th>L</th><th>GF</th><th>GA</th><th>GD</th><th>PTS</th></tr></thead>
-        <tbody>${rows.map((t,i)=>`<tr class="${complete&&i<2?"qualified":""}">
-          <td class="${i<2?"rank":""}">${i+1}</td><td>${esc(t.name)}</td>
-          <td>${t.played}</td><td>${t.w}</td><td>${t.d}</td><td>${t.l}</td>
-          <td>${t.gf}</td><td>${t.ga}</td><td>${t.gd>0?"+":""}${t.gd}</td><td><b>${t.pts}</b></td>
-        </tr>`).join("")}</tbody>
-      </table></div>
-      <div class="notice">${complete?"Top two teams qualify for the knockout stage.":"Complete all group matches to confirm qualification."} Ranking tiebreakers shown: points, goal difference, goals scored. If teams remain tied, apply the league's official tiebreaker rules.</div>
-    </div>`;
-  }).join("");
+
+h2 {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: clamp(28px, 4vw, 38px);
+  font-weight: 400;
+  letter-spacing: -0.8px;
+  color: #0a1930;
 }
-function qualifiers(){
-  if(!groupComplete("A")||!groupComplete("B"))return null;
-  const A=getStandings("A"),B=getStandings("B");
-  return {a1:A[0].name,a2:A[1].name,b1:B[0].name,b2:B[1].name};
+
+.sub {
+  margin-top: 9px;
+  font-size: 12px;
+  letter-spacing: 0.3px;
+  line-height: 1.8;
+  color: #7a7e82;
 }
-function koWinner(id){
-  const s=koScores[id];
-  if(!completed(s))return null;
-  const a=Number(s.a),b=Number(s.b);
-  if(a>b)return "a";
-  if(b>a)return "b";
-  if(s.pa!==""&&s.pb!==""&&Number(s.pa)!==Number(s.pb)){
-    return Number(s.pa)>Number(s.pb)?"a":"b";
+
+.panel {
+  padding: 24px;
+  margin-bottom: 18px;
+  background: #fffdf9;
+  border: 1px solid #e4dfd4;
+  border-radius: 3px;
+  box-shadow: 0 8px 28px #16243a06;
+}
+
+.panel h3 {
+  padding-bottom: 13px;
+  border-bottom: 1px solid #eee8dc;
+  color: #233c5a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.match {
+  padding: 16px 12px;
+  background: #fffdf9;
+  border-color: #e9e4d9;
+  border-radius: 3px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.match:hover {
+  background: #ffffff;
+  border-color: #c9ad70;
+}
+
+.match-label {
+  color: #a08a5e;
+  font-size: 9px;
+  letter-spacing: 1.5px;
+}
+
+.team {
+  font-size: 12px;
+  line-height: 1.6;
+  color: #1d2e46;
+}
+
+.score {
+  background: #f5f2eb;
+  border: 1px solid #ded7c9;
+  border-radius: 2px;
+  color: #0b1a31;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.score:focus {
+  outline: none;
+  border-color: #b99a57;
+  background: white;
+}
+
+th {
+  background: #f0ece3;
+  color: #7e786d;
+  font-size: 9px;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+th, td {
+  padding: 14px 11px;
+  border-bottom: 1px solid #eee9df;
+}
+
+td {
+  color: #37455a;
+  font-variant-numeric: tabular-nums;
+}
+
+.qualified {
+  background: #f5f1e7;
+}
+
+.rank {
+  color: #a27d37;
+}
+
+.bracket {
+  gap: 22px;
+}
+
+.round-label {
+  margin-bottom: 12px;
+  color: #8d7951;
+  font-size: 9px;
+  letter-spacing: 2.5px;
+}
+
+.ko-card {
+  position: relative;
+  padding: 18px;
+  background: #fffdf9;
+  border: 1px solid #e2dccf;
+  border-radius: 3px;
+  box-shadow: 0 7px 20px #14243c08;
+}
+
+.ko-card.final {
+  background: #0d2039;
+  border: 1px solid #c9ad70;
+  box-shadow: 0 12px 35px #0a1b301c;
+}
+
+.ko-card.final .ko-title {
+  color: #d6bb7b;
+}
+
+.ko-card.final .ko-team {
+  color: #f5f0e5;
+  border-color: #ffffff1c;
+}
+
+.ko-card.final .ko-team.winner {
+  color: #e1c47f;
+}
+
+.ko-card.final .status {
+  color: #bdc8d6;
+}
+
+.ko-title {
+  color: #8a7957;
+  font-size: 9px;
+  letter-spacing: 1.8px;
+}
+
+.ko-team {
+  padding: 12px 0;
+  font-size: 12px;
+  border-color: #eee8dc;
+}
+
+.ko-team.winner {
+  color: #a17b34;
+}
+
+.ko-inputs .score {
+  background: #f3efe6;
+  border-color: #ded6c6;
+}
+
+.ko-card.final .ko-inputs .score {
+  color: #ffffff;
+  background: #172d49;
+  border-color: #46556a;
+}
+
+.ko-card.final .ko-inputs label {
+  color: #c3cbd7;
+}
+
+.ko-inputs .pk {
+  background: #f7f4ed;
+  border: 1px solid #ded6c6;
+  border-radius: 2px;
+}
+
+.champion {
+  padding: 30px 15px;
+  background:
+    radial-gradient(ellipse at top, #203a59, transparent 75%),
+    #09172b;
+  border: 1px solid #c9ad70;
+  border-radius: 3px;
+}
+
+.champion .cup {
+  font-size: 36px;
+  filter: saturate(0.7);
+}
+
+.champion .small {
+  color: #d8bf85;
+  font-size: 9px;
+  letter-spacing: 3px;
+}
+
+.champion .name {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 0.2px;
+}
+
+.champion .hint {
+  color: #c1cada;
+  font-size: 11px;
+  line-height: 1.8;
+}
+
+.notice {
+  color: #817f79;
+  font-size: 11px;
+  line-height: 1.9;
+}
+
+footer {
+  padding: 32px 18px;
+  background: #071326;
+  border-top: 2px solid #c9ad70;
+  color: #b5bfce;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+@media (max-width: 760px) {
+  header {
+    padding: 46px 6% 42px;
   }
-  return null;
-}
-function koCard(id,title,teamA,teamB){
-  const s=koScores[id];
-  const winner=koWinner(id);
-  const nameA=teamA||"To Be Determined";
-  const nameB=teamB||"To Be Determined";
-  const winnerName=winner?(winner==="a"?nameA:nameB):null;
-  const disabled=!teamA||!teamB;
-  return `<div class="ko-card ${id==="final"?"final":""}">
-    <div class="ko-title">${title}</div>
-    <div class="ko-team ${winner==="a"?"winner":""}">
-      <span class="name">${esc(nameA)}</span>
-      <span class="val">${completed(s)?s.a:"—"}</span>
-    </div>
-    <div class="ko-team ${winner==="b"?"winner":""}">
-      <span class="name">${esc(nameB)}</span>
-      <span class="val">${completed(s)?s.b:"—"}</span>
-    </div>
-    <div class="ko-inputs">
-      <label>Score</label>
-      <input class="score" type="number" min="0" step="1" value="${s.a}" ${disabled?"disabled":""}
-        aria-label="${title} team one score" onchange="setKoScore('${id}','a',this.value)">
-      <span class="dash">–</span>
-      <input class="score" type="number" min="0" step="1" value="${s.b}" ${disabled?"disabled":""}
-        aria-label="${title} team two score" onchange="setKoScore('${id}','b',this.value)">
-    </div>
-    <div class="ko-inputs">
-      <label>PK</label>
-      <input class="pk" type="number" min="0" step="1" placeholder="—" value="${s.pa}" ${disabled?"disabled":""}
-        aria-label="${title} team one penalty score" onchange="setKoScore('${id}','pa',this.value)">
-      <span class="dash">–</span>
-      <input class="pk" type="number" min="0" step="1" placeholder="—" value="${s.pb}" ${disabled?"disabled":""}
-        aria-label="${title} team two penalty score" onchange="setKoScore('${id}','pb',this.value)">
-    </div>
-    <div class="status">${disabled?"Waiting for group standings":winner?`Winner: ${esc(winnerName)}`:completed(s)?"Winner pending · enter PK if tied":"Enter the match score"}</div>
-  </div>`;
-}
-function setKoScore(id,side,value){
-  koScores[id][side]=value;
-  renderBracket();
-}
-function renderBracket(){
-  const q=qualifiers();
-  const sf1a=q?q.a1:null,sf1b=q?q.b2:null;
-  const sf2a=q?q.b1:null,sf2b=q?q.a2:null;
-  const w1=koWinner("sf1"),w2=koWinner("sf2");
-  const l1=w1?(w1==="a"?sf1b:sf1a):null;
-  const l2=w2?(w2==="a"?sf2b:sf2a):null;
-  const f1=w1?(w1==="a"?sf1a:sf1b):null;
-  const f2=w2?(w2==="a"?sf2a:sf2b):null;
 
-  document.getElementById("sf1").innerHTML=koCard("sf1","SEMI-FINAL 01",sf1a,sf1b);
-  document.getElementById("sf2").innerHTML=koCard("sf2","SEMI-FINAL 02",sf2a,sf2b);
-  document.getElementById("third").innerHTML=koCard("third","THIRD-PLACE MATCH",l1,l2);
-  document.getElementById("final").innerHTML=koCard("final","IAFL CHAMPIONSHIP FINAL",f1,f2);
+  main {
+    padding: 34px 14px 55px;
+  }
 
-  const wf=koWinner("final");
-  const champ=wf?(wf==="a"?f1:f2):null;
-  document.getElementById("champion-name").textContent=champ||"To Be Decided";
-  document.getElementById("champion-hint").textContent=champ
-    ?"Champions of the IAFL League."
-    :"The road to glory starts here.";
+  .section {
+    margin-bottom: 42px;
+  }
+
+  .panel {
+    padding: 16px 12px;
+  }
+
+  .bracket {
+    gap: 18px;
+  }
+
+  .ko-card {
+    padding: 16px;
+  }
+
+  nav {
+    gap: 22px;
+    padding: 0 18px;
+  }
 }
-renderFixtures();
-renderStandings();
-renderBracket();
-</script>
-</body>
-</html>
